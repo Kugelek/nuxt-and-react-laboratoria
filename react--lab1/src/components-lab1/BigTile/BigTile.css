@@ -1,0 +1,30 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 40vh;
+  margin-top: 1.5rem;
+  background-color: white;
+  margin-right: 1.5rem;
+  border-radius: 6px;
+  text-align: start;
+}
+.heading {
+  display: inline-block;
+  color: #444;
+  margin: 0 2rem;
+  padding: 2rem;
+}
+.desc {
+  display: inline-block;
+  margin: 2rem;
+  margin-top: 0rem;
+  padding: 2rem;
+}
+
+.img {
+  margin: 2rem;
+  margin-top: 0rem;
+  padding: 2rem;
+  max-width: 38vh;
+}
