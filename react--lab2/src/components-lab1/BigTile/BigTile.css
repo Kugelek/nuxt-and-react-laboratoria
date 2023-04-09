@@ -9,17 +9,27 @@
   border-radius: 6px;
   text-align: start;
 }
+
+.tile--dark {
+  background-color: #333;
+}
 .heading {
   display: inline-block;
   color: #444;
   margin: 0 2rem;
   padding: 2rem;
 }
+.heading--dark {
+  color: yellow;
+}
 .desc {
   display: inline-block;
   margin: 2rem;
   margin-top: 0rem;
   padding: 2rem;
+}
+.desc--dark {
+  color: yellow;
 }
 
 .img {

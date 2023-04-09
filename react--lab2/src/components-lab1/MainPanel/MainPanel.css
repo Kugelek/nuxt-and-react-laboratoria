@@ -4,6 +4,10 @@
   background-color: #efefef;
   display: flex;
 }
+.main--dark {
+  background-color: black;
+}
+
 @media (max-width: 600px) {
   .main {
     flex-direction: column;

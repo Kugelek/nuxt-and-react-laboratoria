@@ -10,29 +10,44 @@ import { useContext, createContext, useEffect, useState } from "react";
 
 import { FontsizeContext } from "./context";
 function App() {
-  // const FontsizeContext = createContext();
-  // const con = useContext(FontsizeContext);
   const [globalFontSize, setGlobalFontsize] = useState(16);
+  const [theme, setTheme] = useState("LIGHT");
 
   useEffect(() => {
     const storedFontsize = localStorage.getItem("fontsize");
     if (storedFontsize != null) setGlobalFontsize(storedFontsize);
   }, [globalFontSize]);
 
+  // const getCurrentThemeSufix = () => {
+  //   if (theme == '"LIGHT"') return "";
+  //   if (theme == '"DARK"') return "--dark";
+  // };
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme != null) setTheme(storedTheme);
+  }, [theme]);
+
   return (
-    // <FontsizeContext.Provider value={[fontsize, setFontsize]}>
     <div className="App" style={{ fontSize: globalFontSize }}>
-      {/* <FontsizeContext.Consumer>
-        {({ fontsize }) => (
-          <div style={{ fontSize: `${fontsize}px` }}> test</div>
-        )}
-      </FontsizeContext.Consumer> */}
+      {/* <div
+        style={{
+          fontSize: `${globalFontSize}px`,
+        }}
+        class={getCurrentThemeSufix()}
+      >
+        {" "}
+        {theme}
+        {getCurrentThemeSuf()}
+      </div> */}
 
-      <div style={{ fontSize: `${globalFontSize}px` }}> test</div>
-
-      <Panel fontsize={globalFontSize} setFontsize={setGlobalFontsize} />
+      <Panel
+        fontsize={globalFontSize}
+        setFontsize={setGlobalFontsize}
+        theme={theme}
+        setTheme={setTheme}
+      />
     </div>
-    // </FontsizeContext.Provider>
   );
 }
 

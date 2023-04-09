@@ -3,10 +3,17 @@ import React, { useState } from "react";
 import "./BigTile.css";
 
 function BigTile(props) {
+  const getThemedClass = (className) => {
+    if (props.theme == '"DARK"') return `${className} ${className}--dark`;
+    return className;
+  };
+
   return (
-    <div class="tile">
-      <h1 class="heading">{props.heading}</h1>
-      {!props.isImage && <p class="desc">{props.description}</p>}
+    <div class={getThemedClass("tile")}>
+      <h1 class={getThemedClass("heading")}>{props.heading}</h1>
+      {!props.isImage && (
+        <p class={getThemedClass("desc")}>{props.description}</p>
+      )}
       {props.isImage && (
         <img
           class="img"
