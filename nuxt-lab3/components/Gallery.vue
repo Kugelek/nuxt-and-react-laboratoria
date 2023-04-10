@@ -9,8 +9,13 @@
           alt="previous"
         />
       </div>
-
-      <img v-bind:src="mainImgSource" />
+      <!-- <Transition name="movein" appear> -->
+      <img
+        :class="[shouldExecuteAnimation ? animationClass : stagnateClass]"
+        :key="mainImgKey"
+        v-bind:src="mainImgSource"
+      />
+      <!-- </Transition> -->
       <div>
         <img
           src="https://cdn-icons-png.flaticon.com/128/6705/6705398.png"
@@ -61,6 +66,10 @@ export default {
       modalClass: "layout-modal",
       normalGalleryBoxClass: "gallery-box",
       modalGalleryBoxClass: "gallery-box-modal",
+      shouldExecuteAnimation: false,
+      animationClass: "main-move-in",
+      mainImgKey: 1,
+      stagnateClass: "",
       mainImgSource:
         "https://img.freepik.com/free-photo/red-roses-textured-background_53876-34020.jpg?w=1380&t=st=1680301384~exp=1680301984~hmac=3c7439b8c76a7193c4c67dc02d1a0b80fd776218872919975c08f79481f4510e",
       modalVisible: false,
@@ -75,8 +84,14 @@ export default {
   },
 
   methods: {
+    forceRerender() {
+      this.mainImgKey += 1;
+    },
     setToMainImage(event) {
+      this.shouldExecuteAnimation = false;
       if (event !== null) this.mainImgSource = event.target.src;
+      this.shouldExecuteAnimation = true;
+      this.forceRerender();
     },
     nextMainImage() {
       const oldInd = this.allImgs.findIndex((x) => x === this.mainImgSource);
@@ -85,11 +100,15 @@ export default {
       console.log(newInd);
       if (newInd < this.allImgs.length)
         this.mainImgSource = this.allImgs[newInd];
+      this.shouldExecuteAnimation = true;
+      this.forceRerender();
     },
     previousMainImage(event) {
       const oldInd = this.allImgs.findIndex((x) => x === this.mainImgSource);
       const newInd = oldInd - 1;
       if (newInd >= 0) this.mainImgSource = this.allImgs[newInd];
+      this.shouldExecuteAnimation = true;
+      this.forceRerender();
     },
     switchModal() {
       this.modalVisible = !this.modalVisible;
@@ -98,6 +117,19 @@ export default {
 };
 </script>
 <style>
+@import "./GalleryAnimations.css";
+.movein-enter-active,
+.movein-leave-active {
+  transition: all 0.5s ease;
+  opacity: 1;
+  transform: rotate(0deg) translate(60px);
+}
+
+.movein-enter-from,
+.movein-leave-to {
+  opacity: 0.2;
+  transform: translate(-60px);
+}
 .layout-normal {
   justify-content: center;
   align-items: center;
@@ -112,11 +144,11 @@ export default {
 .gallery-main {
   border: 1px solid black;
   max-height: 50vh;
-  width: 50vw;
+  width: 60vw;
   display: flex;
   margin: 3rem;
   padding: 5rem;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .gallery-main > img {
@@ -171,7 +203,7 @@ export default {
 .arrow {
   width: 2rem !important;
   height: 2rem !important;
-  margin: 0.5rem;
+  margin: -2.5rem;
   cursor: pointer;
 }
 .arrow:hover {
