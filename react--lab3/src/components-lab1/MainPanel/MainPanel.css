@@ -1,0 +1,63 @@
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #efefef;
+  display: flex;
+}
+.main--dark {
+  background-color: black;
+}
+
+@media (max-width: 600px) {
+  .main {
+    flex-direction: column;
+  }
+}
+.right {
+  width: 100%;
+
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.chat {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1vw 2vw;
+  margin: 2rem;
+}
+
+.chat {
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 10%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-top {
+}
+.chat-bottom {
+  background-color: white;
+  padding: 2rem;
+  height: 15vh;
+  width: 100%;
+  margin-left: -2rem;
+}
+
+.chat-visible {
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 1rem 2rem;
+  margin-left: -2rem;
+}
