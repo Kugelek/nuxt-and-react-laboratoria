@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BigTile from "../BigTile/BigTile";
 import Searchbar from "../Searchbar/Searchbar";
 import SideNav from "../SideNav/SideNav";
+import Login from "../Login/Login";
 import "./MainPanel.css";
 import { Switch, Route, Router, BrowserRouter, Routes } from "react-router-dom";
 function MainPanel({ fontsize, setFontsize, theme, setTheme }) {
@@ -22,35 +23,6 @@ function MainPanel({ fontsize, setFontsize, theme, setTheme }) {
         />
         <section class="right">
           <Searchbar fontsize={fontsize} theme={theme} />
-          {/* <BrowserRouter>
-          <Routes>
-            <Route exact path="/" component={BigTile}> */}
-          {/* <>
-                <BigTile heading="Some chart" isImage="true" theme={theme} />
-                <BigTile
-                  theme={theme}
-                  heading="Lorem ipsum"
-                  description="eLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc erat, pharetra ut ultricies quis, tristique ut sapien. Suspendisse eget ipsum a purus volutpat fringilla et eget dui. Fusce sed nulla elit. Vivamus varius ullamcorper imperdiet. Donec egestas felis eget quam hendrerit, in accumsan est fringilla. Pellentesque sed suscipit dui, nec vulputate tellus. Morbi ut augue ut dolor pulvinar dapibus nec ac ex. Etiam maximus nisi sapien, id sodales nunc interdum at. Pellentesque ultricies pretium consectetur. Etiam hendrerit mi vel consectetur egestas. Suspendisse vitae maximus tellus, aliquam sagittis dui. Nullam at vestibulum nulla. Sed nisi magna, pretium et pretium vitae, vulputate a justo. "
-                />
-              </> */}
-          {/* </Route> */}
-          {/* <Route path="/add-post">
-              <AddPostPage />
-            </Route>
-            <Route path="/article/:id">
-              <SinglePostPage />
-            </Route>
-            <Route path="/edit/:id">
-              <EditPostPage />
-            </Route>
-            <Route path="/stats">
-              <StatsPage />
-            </Route>
-            <Route path="/login">
-              <LoginPage />
-            </Route> */}
-          {/* </Routes>
-        </BrowserRouter> */}
 
           <Routes>
             <Route
@@ -110,6 +82,21 @@ function MainPanel({ fontsize, setFontsize, theme, setTheme }) {
                   theme={theme}
                 />
               }
+            ></Route>
+            <Route
+              path="/contact"
+              element={
+                <BigTile
+                  heading="Contact me"
+                  description="jan.kowalski3424234234@gmail.com"
+                  isImage="false"
+                  theme={theme}
+                />
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={<Login heading="Login to the website" theme={theme} />}
             ></Route>
           </Routes>
 
