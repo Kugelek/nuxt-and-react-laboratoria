@@ -9,6 +9,7 @@
         :key="test + index"
         height="40px"
         width="80px"
+        @click="setModal(value)"
         class="smallimage"
       />
     </div>
@@ -29,6 +30,13 @@ export default {
     };
   },
   methods: {
+    setModal(value) {
+      const data = {
+        state: true,
+        content: value,
+      };
+      this.$nuxt.$emit("openModal", data);
+    },
     async fetchData() {
       this.imgs1 = [];
       this.renderComponent = false;
