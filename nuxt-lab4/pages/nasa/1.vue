@@ -1,15 +1,18 @@
 <template>
-  <div style="display: flex; flex-direction: column">
+  <div class="container">
     <h1>planety z nasa api</h1>
-
-    <div style="display: flex; width: 600px">
+    <input class="input" v-model="search" />
+    <div class="imgcontainer">
       <img
-        :src="value.links[0].href"
-        v-for="(value, index) in imgs"
-        :key="index"
-        style="width: 100px"
+        :src="value"
+        v-for="(value, index) in imgs1"
+        :key="test + index"
+        height="40px"
+        width="80px"
+        class="smallimage"
       />
     </div>
+    <button class="btn" @click="fetchData">search</button>
   </div>
 </template>
 
@@ -18,26 +21,71 @@
 // import axios from "axios";
 export default {
   name: "NasaPage",
+  data() {
+    return {
+      imgs1: [],
+      search: "",
+      renderComponent: true,
+    };
+  },
   methods: {
-    data: {
-      imgs: [],
-    },
     async fetchData() {
-      fetch("https://images-api.nasa.gov/search?q=sun")
+      this.imgs1 = [];
+      this.renderComponent = false;
+      console.log(this.search);
+      fetch(`https://images-api.nasa.gov/search?q=${this.search}`)
         .then((response) => response.json())
         .then((res) => {
           console.log(res.collection.items);
-          this.imgs = res.collection.items.splice(0, 95);
+          this.imgs1 = res.collection.items
+            .filter(
+              (el) =>
+                el.links != null &&
+                el.links != undefined &&
+                el.links[0] != undefined &&
+                el.links[0] != null
+            )
+            .splice(0, 50)
+            .map((el) => el.links[0].href);
+          console.log(this.imgs1);
         });
-      // .then(data => (this.totalVuePackages = data.total));
-      //   const res = await axios
-      //     .get("https://images-api.nasa.gov/search?q=sun")
-      //     .then((res) => console.log(res));
-      // },
+
+      this.renderComponent = true;
     },
   },
-  created() {
+  mounted() {
+    console.log("imgs1");
+
     this.fetchData();
+    console.log(this.imgs1);
   },
 };
 </script>
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  width: 50vw;
+  margin-left: 10vw;
+}
+.smallimage {
+  margin: 5px;
+}
+.imgcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #eee;
+  width: 600px;
+}
+.btn {
+  width: 20%;
+  margin: 2rem;
+}
+.input {
+  width: 50%;
+  margin: 1rem;
+  padding: 1rem;
+}
+</style>

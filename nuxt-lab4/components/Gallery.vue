@@ -56,6 +56,7 @@
 
 <script>
 export default {
+  name: "Gallery",
   props: {
     showMagnifyGlass: String,
   },
